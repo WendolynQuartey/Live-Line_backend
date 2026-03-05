@@ -18,10 +18,10 @@ const userSchema = new mongoose.Schema(
       },
       location: {
          longitude: {
-            type: num,
+            type: Number,
          },
          latitude: {
-            type: num,
+            type: Number,
          },
       }
    }

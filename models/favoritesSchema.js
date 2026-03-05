@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const favoritesSchema = new mongoose.Schema(
    {
       userId: {
-         type: num,
-         unique: num,
+         type: Number,
+         unique: true,
          required: true,
       },
       category: {
@@ -17,10 +17,10 @@ const favoritesSchema = new mongoose.Schema(
       },
       location: {
          longitude: {
-            type: num,
+            type: Number,
          },
          latitude: {
-            type: num,
+            type: Number,
          },
       }
    }
