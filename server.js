@@ -14,6 +14,7 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(logReq);
+
 // Routes
 
 
