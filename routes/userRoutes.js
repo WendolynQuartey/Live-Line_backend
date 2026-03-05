@@ -24,5 +24,10 @@ router.route("/:id")
       if(!updateUser) return res.status(404).json({error: "User Not Found!"});
       else res.json(updateUser);
    })
+   .delete(async (req, res) => {
+      let deletedUser = await User.findByIdAndDelete(req.params.id);
+      if(!deletedUser) return res.status(404).json({error: "User Not Found!"});
+      else res.json(deletedUser);
+   })
 
 export default router;
