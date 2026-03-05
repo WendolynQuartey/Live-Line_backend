@@ -17,4 +17,12 @@ router.route("/")
       res.json(allUsers);
    });
 
+router.route("/:id")
+   // Update
+   .put(async (req, res) => {
+      let updateUser = await User.findByIdAndUpdate(req.params.id, req.body, {returnDocument: 'after', runValidators: true});
+      if(!updateUser) return res.status(404).json({error: "User Not Found!"});
+      else res.json(updateUser);
+   })
+
 export default router;
