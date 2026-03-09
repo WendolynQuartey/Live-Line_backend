@@ -3,8 +3,10 @@ import express from "express";
 import dotenv from "dotenv";
 import {logReq, globalError} from "./middleware/middleware.js";
 import userRoutes from "./routes/userRoutes.js";
-import cors from "cors";
+import favoriteRoutes from "./routes/favoriteRoutes.js";
+import mtaRoutes from "./routes/mtaRoutes.js";
 import connectDB from "./db/conn.js";
+import cors from "cors";
 
 // Setups
 dotenv.config();
@@ -13,11 +15,14 @@ const PORT = process.env.PORT || 3001;
 connectDB();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(logReq);
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/favorites", favoriteRoutes);
+app.use("/api/mta", mtaRoutes);
 
 // Global Error Handling Middleware
 app.use(globalError);
