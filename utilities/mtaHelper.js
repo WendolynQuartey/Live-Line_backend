@@ -13,29 +13,27 @@ export async function getClosestStations(req, res, next) {
          params: {lat, lon}
       });
 
-      console.log("Full response:", JSON.stringify(response.data, null, 2));
+      // console.log("Full response:", JSON.stringify(response.data, null, 2));
 
       const stations = response.data.data;
+      const now = new Date();
 
-      const closest = stations.map(station => ({
-         ...station,
+      const result = stations.map(station => ({
+         id: station.id,
+         name: station.name,
+         routes: station.routes,
+         location: station.location,
          distance: getDistance(
             {latitude: parseFloat(lat), longitude: parseFloat(lon)},
-             {latitude: station.lat, longitude: station.lon},
-         )
+             {latitude: station.location[0], longitude: station.location[1]},
+         ),
+         upcomingTrains: {
+            N: station.N.filter(train => new Date(train.time) >= now),
+            S: station.S.filter(train => new Date(train.time) >= now),
+         }
       }))
          .sort((x, y) => x.distance - y.distance)
-         .slice(0,5); // 5 closest stations
-
-      const now = new Date();
-      const result = closest.map(station => ({
-         name: station.name,
-         line: station.line,
-         distance: station.distance,
-         upcomingTrains: station.upcomingTrains.filter(train => new Date(train.arrival_time) >= now)
-      }))
-
-
+         .slice(0, 5); // 5 closest stations
 
       res.json(result);
    } catch (error) {
