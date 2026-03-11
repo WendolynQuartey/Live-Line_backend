@@ -9,40 +9,40 @@ router.route("/")
       try {
          const existing = await PinnedLine.findOne({
             userId: req.body.userId,
-            stationId: req.body.stationId
+            route: req.body.route
          });
          if (existing) return res.status(400).json({error: "Train line already pinned"});
-   
-         res.json(newFavorite);
+         
+         const newPin = new PinnedLine(req.body);
+         await newPin.save();
+         res.status(201).json(newPin);
+        
       } catch (error) {
-         res.status(500).json({error: error.message})
+         res.status(500).json({error: error.message});
       }
    })
    // Read - Show All
    .get(async (req, res) => {
-      let allFavorites = await Favorite.find({});
-
-      res.json(allFavorites);
+      try {
+         const { userId } = req.query;
+         let allPins = await Favorite.find({userId});
+   
+         res.json(allPins);
+      } catch (error) {
+          res.status(500).json({error: error.message});
+      }
    });
 
 router.route("/:id")
-   // Update
-   .put(async (req, res) => {
-      let updateFavorite = await Favorite.findByIdAndUpdate(req.params.id, req.body, {returnDocument: 'after', runValidators: true});
-      if(!updateFavorite) return res.status(404).json({error: "User Not Found!"});
-      else res.json(updateFavorite);
-   })
    // Delete
    .delete(async (req, res) => {
-      let deletedFavorite = await Favorite.findByIdAndDelete(req.params.id);
-      if(!deletedFavorite) return res.status(404).json({error: "User Not Found!"});
-      else res.json(deletedFavorite);
+      try {
+         const deletedPin = await Favorite.findByIdAndDelete(req.params.id);
+         if(!deletedPin) return res.status(404).json({error: "Pinned line not found!"});
+         else res.json(deletedPin);
+      } catch (error) {
+         res.status(500).json({error: error.message})
+      }
    })
-   // Show One User
-   .get(async (req, res) => {
-      let oneFavorite = await Favorite.findById(req.params.id);
-      if(!oneFavorite) return res.status(404).json({error: "User Not Found!"});
-      else res.json(oneFavorite);
-   });
 
 export default router;
