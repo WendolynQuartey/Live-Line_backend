@@ -13,8 +13,6 @@ export async function getClosestStations(req, res, next) {
          params: {lat, lon}
       });
 
-      // console.log("Full response:", JSON.stringify(response.data, null, 2));
-
       const stations = response.data.data;
       const now = new Date();
 

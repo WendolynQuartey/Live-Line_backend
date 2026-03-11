@@ -27,10 +27,11 @@ router.route("/")
    .get(async (req, res) => {
       try {
          const { userId } = req.query;
-         let allPins = await Favorite.find({userId});
-   
+         let allPins = await PinnedLine.find({userId});
+         
          res.json(allPins);
       } catch (error) {
+         console.error("Get pins error:", error.message);
           res.status(500).json({error: error.message});
       }
    });
@@ -39,7 +40,7 @@ router.route("/:id")
    // Delete
    .delete(async (req, res) => {
       try {
-         const deletedPin = await Favorite.findByIdAndDelete(req.params.id);
+         const deletedPin = await PinnedLine.findByIdAndDelete(req.params.id);
          if(!deletedPin) return res.status(404).json({error: "Pinned line not found!"});
          else res.json(deletedPin);
       } catch (error) {
