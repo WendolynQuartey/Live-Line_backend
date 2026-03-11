@@ -24,7 +24,7 @@ app.use(logReq);
 app.use("/api/users", userRoutes);
 app.use("/api/favorites", favoriteRoutes);
 app.use("/api/mta", mtaRoutes);
-app.use("ap/pinned", pinnedLinesRoutes);
+app.use("/api/pinned", pinnedLinesRoutes);
 
 // Global Error Handling Middleware
 app.use(globalError);

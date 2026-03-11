@@ -7,7 +7,7 @@ const pinnedLinesSchema = new mongoose.Schema(
          ref: "User",
          required: true,
       },
-      routes:{
+      route:{
          type: String,
          required: true,
       }

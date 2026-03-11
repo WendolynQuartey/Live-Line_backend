@@ -7,6 +7,8 @@ router.route("/")
    // Create
    .post(async (req, res) => {
       try {
+         console.log("Hit pinned route");
+         console.log("Body:", req.body);
          const existing = await PinnedLine.findOne({
             userId: req.body.userId,
             route: req.body.route
