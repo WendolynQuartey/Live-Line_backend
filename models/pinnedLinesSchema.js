@@ -7,25 +7,11 @@ const pinnedLinesSchema = new mongoose.Schema(
          ref: "User",
          required: true,
       },
-      stationId: {
+      routes:{
          type: String,
          required: true,
-      },
-      stationName: {
-         type: String,
-         required: true,
-      },
-      routes: [{type: String}],
-      location: {
-         longitude: {
-            type: Number,
-         },
-         latitude: {
-            type: Number,
-         },
       }
-   }
-
+      }
 )
 
 export default mongoose.model("PinnedLine", pinnedLinesSchema);
