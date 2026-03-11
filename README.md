@@ -22,8 +22,13 @@ A Node.js, Express, and MongoDB backend API for the app Live-Line where users ca
 | PUT    	| /api/favorites/:id 	| Update favorite location information     	| Update         	|
 | DELETE 	| /api/favorites/:id 	| Delete favorite location    	| Delete         	|
 
+### 🚇 MTA Routes 
+| Method 	| Endpoint       	| Description             	| CRUD Operation 	|
+|--------	|----------------	|-------------------------	|----------------	|
+| GET    	| /api/mta/nearby     	| Gets the 5 nearest station within a 10-12 minutes walk, the trains arriving at those stations in the next 30 minutes, and how far each train is from their station         	| Read           	|
 
-[Live-Line's front-end](https://github.com/WendolynQuartey/Live-Line_frontend)
+
+[Live-Line's Front-End](https://github.com/WendolynQuartey/Live-Line_frontend)
 
 #### Resources
 - Transitland REST API
