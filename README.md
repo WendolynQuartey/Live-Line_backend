@@ -31,4 +31,4 @@ A Node.js, Express, and MongoDB backend API for the app Live-Line where users ca
 [Live-Line's Front-End](https://github.com/WendolynQuartey/Live-Line_frontend)
 
 #### Resources
-- Transitland REST API
+- [MTA Realtime API JSON Proxy](https://github.com/jonthornton/MTAPI)
